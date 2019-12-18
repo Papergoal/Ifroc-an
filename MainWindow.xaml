@@ -1,0 +1,134 @@
+﻿<Window x:Class="WpfApp13.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp13"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="800" Width="1600"
+        ResizeMode="NoResize"
+        Topmost="False" WindowState="Normal" MouseMove="Window_MouseMove">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="1"/>
+            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <StackPanel>
+            <TabControl Margin="0,0,0,0">
+                <TabItem Header="Liste Des Personnes" Background="LightBlue">
+                    <ScrollViewer Height="450" VerticalScrollBarVisibility="Visible" >
+                        <StackPanel HorizontalAlignment="Center">
+                            <Grid Margin="30,30,0,0">
+                                <DataGrid Name="listePersonnes" ItemsSource="{Binding}" AutoGenerateColumns="false" HorizontalAlignment="Left"   SelectionChanged="listePersonnes_SelectionChanged">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="ID" Binding="{Binding idPersonneProperty, Mode=OneWay}" />
+                                        <DataGridTextColumn Header="Nom" Binding="{Binding nomPersonneProperty}" />
+                                        <DataGridTextColumn Header="Prénom" Binding="{Binding prenomPersonneProperty}" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                            <Button x:Name="supprimerButton" Content="Supprimer" MouseDoubleClick="supprimerButton_MouseDoubleClick" BorderBrush="Black" BorderThickness="2" Margin="0,25,0,25" Width="150" Height="50" Background="Red" FontSize="18">
+                            </Button>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Ajouter une Personne" Background="CadetBlue">
+                    <Grid Name ="gridajouter" VerticalAlignment="Top">
+                        <StackPanel>
+                            <Label Content="Nom" Width="40"></Label>
+                            <TextBox Name="nomTextBox" Height="20" Margin="100,10,100,10"/>
+                            <Label Content="Prenom" Width="100"></Label>
+                            <TextBox Name="prenomTextBox" Height="20" Margin="100,10,100,10" />
+                            <Button x:Name="nomPrenomButton" Content="Ajouter une Personne" MouseDoubleClick="nomPrenomButton_MouseDoubleClick" BorderBrush="Black" BorderThickness="2" Margin="0,25,0,25" Width="250" Height="50" Background="Green" FontSize="18">
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header ="Liste des Plages" Background="DeepSkyBlue">
+                    <ScrollViewer Height="450" VerticalScrollBarVisibility="Visible" >
+                        <StackPanel HorizontalAlignment="Center">
+                            <Grid Margin="30,30,0,0">
+                        <DataGrid Name="listePlages" ItemsSource="{Binding}" AutoGenerateColumns="false" HorizontalAlignment="Left" SelectionChanged="listePlages_SelectionChanged">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="ID" Binding="{Binding idPlageProperty, Mode=OneWay}" />
+                                <DataGridTextColumn Header="Nom de la plage" Binding="{Binding nomPlageProperty}" />
+                                <DataGridTextColumn Header="Superficie de la plage" Binding="{Binding superficiePlageProperty}" />
+                                <DataGridTextColumn Header="ID de la ville correspondante" Binding="{Binding villeProperty}" />
+                            </DataGrid.Columns>
+                        </DataGrid>
+                    </Grid>
+                    <Button x:Name="supprimer2Button" Content="Supprimer" MouseDoubleClick="supprimer2Button_MouseDoubleClick" BorderBrush="Black" BorderThickness="2" Margin="0,25,0,25" Width="150" Height="50" Background="Red" FontSize="18">
+                    </Button>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Ajouter une Plage" Background="CornflowerBlue">
+                    <Grid Name ="gridajouterp" VerticalAlignment="Top">
+                        <StackPanel>
+                            <Label Content="Nom de la plage" Width="100"></Label>
+                            <TextBox Name="nompTextBox" Height="20" Margin="100,10,100,10"/>
+                            <Label Content="Superficie de la plage" Width="125"></Label>
+                            <TextBox Name="superficieTextBox" Height="20" Margin="100,10,100,10" />
+                            <Label Content="Id de la ville correspondante" Width="200"></Label>
+                            <TextBox Name="idvilleTextBox" Height="20" Margin="100,10,100,10" />
+                            <Button x:Name="goVilleButton" Content="Voir les villes et leurs Ids" MouseDoubleClick="goVilleButton_MouseDoubleClick" Margin="0,25,0,25" BorderBrush="DarkBlue" BorderThickness="2" Width="250" Height="50" Background="LightBlue" FontSize="14">
+                            </Button>
+                            <Button x:Name="plageButton" Content="Ajouter une Plage" MouseDoubleClick="plageButton_MouseDoubleClick" BorderBrush="DarkSeaGreen" BorderThickness="2" Margin="0,25,0,25" Width="250" Height="50" Background="Green" FontSize="18">
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Liste Des Etudes" Background="SteelBlue">
+                    <ScrollViewer Height="450" VerticalScrollBarVisibility="Visible" >
+                        <StackPanel HorizontalAlignment="Center">
+                            <Grid Margin="30,30,0,0">
+                                <DataGrid Name="listeEtudes" ItemsSource="{Binding}" AutoGenerateColumns="false" HorizontalAlignment="Left" SelectionChanged="listeEtudes_SelectionChanged">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="ID" Binding="{Binding idEtudeProperty, Mode=OneWay}" />
+                                        <DataGridTextColumn Header="Nom" Binding="{Binding nomEtudeProperty}" />
+                                        <DataGridTextColumn Header="Date" Binding="{Binding dateEtudeProperty, Mode=TwoWay}" />
+                                        <DataGridTextColumn Header="Nombre de personnes" Binding="{Binding nbPersonneProperty}" />
+                                        <DataGridTextColumn Header="ID du responsable de l'étude" Binding="{Binding idPersonneProperty}" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+                <TabItem Header="Ajouter une Etude" Background="PowderBlue">
+                    <Grid Name ="gridajoutere" VerticalAlignment="Top">
+                        <StackPanel>
+                            <Label Content="Intitulé de l'étude" Width="110"></Label>
+                            <TextBox Name="nomeTextBox" Height="20" Margin="100,10,100,10"/>
+                            <Label Content="Date et heure de l'étude" Width="140"></Label>
+                            <DatePicker Name="dateDatePicker" Height="27" Margin="100,10,100,10" />
+                            <Label Content="Nombre de personne y ayant contribué" Width="220"></Label>
+                            <TextBox Name="nbpersTextBox" Height="20" Margin="100,10,100,10" />
+                            <Label Content="ID de la personne" Width="220"></Label>
+                            <TextBox Name="idpersTextBox" Height="20" Margin="100,10,100,10" />
+                            <Button x:Name="etudeButton" Content="Ajouter une Plage" MouseDoubleClick="etudeButton_MouseDoubleClick" BorderBrush="DarkSeaGreen" BorderThickness="2" Margin="0,25,0,25" Width="250" Height="50" Background="Green" FontSize="18">
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Liste Des Departements" Background="DodgerBlue">
+                    <ScrollViewer Height="450" VerticalScrollBarVisibility="Visible" >
+                        <StackPanel HorizontalAlignment="Center">
+                            <Grid Margin="30,30,0,0">
+                                <DataGrid Name="listeDepartements" ItemsSource="{Binding}" AutoGenerateColumns="false" HorizontalAlignment="Left" SelectionChanged="listeDepartements_SelectionChanged">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="ID" Binding="{Binding idDepartementProperty, Mode=OneWay}" />
+                                        <DataGridTextColumn Header="Nom" Binding="{Binding nomDepartementProperty}" />
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+    </DockPanel>
+</Window>
